@@ -1,0 +1,66 @@
+---
+
+# Define the encrypted SQL password variable outside the nested structures due
+# to the issue described in https://stackoverflow
+# .com/questions/50770524/ansible-vault-inline-variable-with-to-nice-json
+# -unexpected-templating-type-erro
+sql_password: !vault |
+  $ANSIBLE_VAULT;1.1;AES256
+  32306133336163633436383866626230323566343063313838333434376165643564623639636539
+  3364613464633139363831393161636431663630326539660a643730366362343839646132653739
+  65313566356235303839373336333761373232376262306236646365653931656337636439643065
+  6338326561616333610a333834306337333431643338666236386138613333633137373834356663
+  62373965396338303236383964646131623934373439663163396239393938336334643437613838
+  3762353166616631636234653538643336396663303236303833
+
+# PostgreSQL Server Settings.
+postgresql_python_library: "python-psycopg2"
+
+# PostgreSQL Server Databases.
+postgresql_databases:
+  - name: "fightfor"
+    port: 5432
+  - name: "test"
+    port: 5432
+# PostgreSQL Server Users.
+postgresql_users:
+  - name: "fightfor_alembic"
+    password: "{{ sql_password }}"
+    port: 5432
+
+app_fightfor_alembic:
+
+  # Application user settings.
+  user: fightfor_alembic
+  group: fightfor_alembic
+
+  # Application directories.
+  config_dir: /etc/fightfor-alembic
+  share_dir: /usr/local/share/fightfor-alembic
+  run_dir: /var/run/fightfor-alembic
+  log_dir: /var/log/fightfor-alembic
+  virtual_env_dir: /usr/local/share/fightfor-alembic/venvs/fightfor-alembic
+
+  # Application Configuration Settings.
+  config:
+
+    dev:
+      # General Settings.
+      logger_level: DEBUG
+
+      # PostgreSQL Server Configuration Settings.
+      sql_host: "localhost"
+      sql_port: 5432
+      sql_username: "fightfor_alembic"
+      sql_password: "{{ sql_password }}"
+      sql_db: "fightfor"
+    prod:
+      # General Settings.
+      logger_level: INFO
+
+      # PostgreSQL Server Configuration Settings.
+      sql_host: "localhost"
+      sql_port: 5432
+      sql_username: "fightfor_alembic"
+      sql_password: "{{ sql_password }}"
+      sql_db: "fightfor"
