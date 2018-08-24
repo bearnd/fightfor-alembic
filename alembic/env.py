@@ -21,7 +21,7 @@ from fform.orm_ct import *
 
 
 cfg = import_config(
-    fname_config_file="/etc/fightfor-alembic/fightfor-alembic.json"
+    fname_config_file="/etc/fightfor-alembic/fightfor-alembic-dev.json"
 )
 
 
