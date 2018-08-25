@@ -1,8 +1,7 @@
 ---
 
-app_fightfor_alembic:
-
-  dependencies_apt:
+dependencies:
+  apt:
     - git
     - htop
     - build-essential
@@ -15,11 +14,12 @@ app_fightfor_alembic:
     - libffi-dev
     - python-lxml
     - python3-psycopg2
-
-  dependencies_pip_system:
-    - pip==9.0.1
-    - setuptools==36.2.7
-    - virtualenv==15.1.0
-
-  dependencies_pip_virtualenv:
-    - ipython==6.1.0
+    - postgis
+    - postgresql-9.5-postgis-scripts
+  pip:
+    system:
+      - pip==9.0.1
+      - setuptools==36.2.7
+      - virtualenv==15.1.0
+    virtualenv:
+      - ipython==6.1.0
