@@ -1,5 +1,10 @@
 ## Changelog
 
+### v0.4.0
+
+- Fixed bugs in Ansible role.
+- Added a new revision to add new indices on columns used in clinical-trials study-filtering.
+
 ### v0.3.0
 
 - Updated Python dependencies.
