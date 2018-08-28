@@ -1,5 +1,9 @@
 ## Changelog
 
+### v0.4.1
+
+- Added a new revision to change all `clinicaltrials.facilities_canonical` columns except `google_place_id` to nullable.
+
 ### v0.4.0
 
 - Fixed bugs in Ansible role.
