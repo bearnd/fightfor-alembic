@@ -1,5 +1,9 @@
 ## Changelog
 
+### v0.4.2
+
+- Added migration to add new indices.
+
 ### v0.4.1
 
 - Added a new revision to change all `clinicaltrials.facilities_canonical` columns except `google_place_id` to nullable.
