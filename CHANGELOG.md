@@ -1,5 +1,12 @@
 ## Changelog
 
+### v0.5.0
+
+Issue No. 156: Model a user-data schema:
+
+- Updated Ansible to create the `app` schema in PostgreSQL.
+- Added a new revision to create the new tables under the `app` schema.
+
 ### v0.4.2
 
 - Added migration to add new indices.
