@@ -36,6 +36,7 @@ postgresql_schemata:
   - clinicaltrials
   - pubmed
   - mesh
+  - app
 
 # PostgreSQL extensions.
 postgresql_extensions:
