@@ -1,5 +1,11 @@
 ## Changelog
 
+### v0.6.0
+
+Issue No. 166: Add tables for studies and citations saved by the user:
+
+- Added new revision to create the user studies and citations tables.
+
 ### v0.5.0
 
 Issue No. 156: Model a user-data schema:
