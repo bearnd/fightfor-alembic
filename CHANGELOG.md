@@ -1,5 +1,11 @@
 ## Changelog
 
+### v0.7.0
+
+Issue No. 188: Design table to hold definitions for the different MeSH descriptors:
+
+- Added revision to create the MeSH descriptor definition table.
+
 ### v0.6.0
 
 Issue No. 166: Add tables for studies and citations saved by the user:
