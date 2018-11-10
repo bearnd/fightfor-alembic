@@ -1,5 +1,9 @@
 ## Changelog
 
+### v0.7.1
+
+- Added a new revision to add the MD5 field to the MeSH descriptors defnitions table and include it in the unique constraint.
+
 ### v0.7.0
 
 Issue No. 188: Design table to hold definitions for the different MeSH descriptors:
