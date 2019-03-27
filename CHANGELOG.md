@@ -1,5 +1,9 @@
 ## Changelog
 
+### v0.9.0
+
+- Released without merging the feature branch.
+
 ### v0.8.0
 
 - Removed all existing revisions.
