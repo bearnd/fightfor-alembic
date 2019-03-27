@@ -43,6 +43,13 @@ postgresql_extensions:
   - pg_trgm
   - postgis
 
+# PostgreSQL privileges.
+postgresql_privileges:
+  - db: fightfor
+    privs: ALL
+    type: database
+    obj: fightfor
+    role: "{{ system.user }}"
 
 project:
   name: "fightfor-alembic"
