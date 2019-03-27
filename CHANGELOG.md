@@ -1,5 +1,11 @@
 ## Changelog
 
+### v0.8.0
+
+- Removed all existing revisions.
+- Added a new revision file to replace all previous revisions and represent the latest state of the schema.
+- Updated some PostgreSQL-related tasks not to only run in the Vagrant VM but the production server as well.
+
 ### v0.7.1
 
 - Added a new revision to add the MD5 field to the MeSH descriptors defnitions table and include it in the unique constraint.
