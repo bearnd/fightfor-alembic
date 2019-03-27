@@ -29,7 +29,6 @@
   with_items: "{{ postgresql_schemata }}"
   become: true
   become_user: postgres
-  when: is_vagrant is defined and is_vagrant == True
 
 - name: Create schemata in the `test` database under PostgreSQL.
   postgresql_schema:
@@ -49,7 +48,6 @@
   with_items: "{{ postgresql_extensions }}"
   become: true
   become_user: postgres
-  when: is_vagrant is defined and is_vagrant == True
 
 - name: Install extensions in the `test` database under PostgreSQL.
   postgresql_ext:
@@ -98,7 +96,6 @@
   with_items:
     - "pg_hba.conf"
     - "postgresql.conf"
-  when: is_vagrant is defined and is_vagrant == True
 
 - name: Set PostgreSQL privileges.
   postgresql_privs:
