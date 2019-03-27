@@ -100,6 +100,17 @@
     - "postgresql.conf"
   when: is_vagrant is defined and is_vagrant == True
 
+- name: Set PostgreSQL privileges.
+  postgresql_privs:
+    db: "{{ item.db }}"
+    privs: "{{ item.privs }}"
+    type: "{{ item.type }}"
+    obj: "{{ item.obj }}"
+    role: "{{ item.role }}"
+  with_items: "{{ postgresql_privileges }}"
+  become: true
+  become_user: postgres
+
 - name: Install system-level Python dependencies
   pip:
     name: "{{ item }}"
