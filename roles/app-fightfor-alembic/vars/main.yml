@@ -30,6 +30,15 @@ postgresql_users:
   - name: "{{ system.user }}"
     password: "{{ sql_password }}"
     port: 5432
+  - name: "ct_ingester"
+    password: "{{ sql_password }}"
+    port: 5432
+  - name: "mt_ingester"
+    password: "{{ sql_password }}"
+    port: 5432
+  - name: "pubmed_ingester"
+    password: "{{ sql_password }}"
+    port: 5432
 
 # PostgreSQL schemata.
 postgresql_schemata:
@@ -45,11 +54,118 @@ postgresql_extensions:
 
 # PostgreSQL privileges.
 postgresql_privileges:
+  # GRANT ALL PRIVILEGES ON DATABASE fightfor TO fightfor_alembic;
   - db: fightfor
     privs: ALL
     type: database
     obj: fightfor
     role: "{{ system.user }}"
+    schema: ""
+  # GRANT ALL PRIVILEGES ON DATABASE fightfor TO ct_ingester;
+  - db: fightfor
+    privs: ALL
+    type: database
+    obj: fightfor
+    role: "ct_ingester"
+    schema: ""
+  # GRANT ALL PRIVILEGES ON DATABASE fightfor TO mt_ingester;
+  - db: fightfor
+    privs: ALL
+    type: database
+    obj: fightfor
+    role: "mt_ingester"
+    schema: ""
+  # GRANT ALL PRIVILEGES ON DATABASE fightfor TO pubmed_ingester;
+  - db: fightfor
+    privs: ALL
+    type: database
+    obj: fightfor
+    role: "pubmed_ingester"
+    schema: ""
+  # GRANT USAGE ON SCHEMA clinicaltrials TO ct_ingester;
+  - db: fightfor
+    privs: USAGE
+    type: schema
+    obj: "clinicaltrials"
+    role: "ct_ingester"
+    schema: ""
+  # GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA clinicaltrials TO ct_ingester;
+  - db: fightfor
+    privs: ALL
+    type: table
+    obj: ALL_IN_SCHEMA
+    role: "ct_ingester"
+    schema: clinicaltrials
+  # GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA clinicaltrials TO ct_ingester;
+  - db: fightfor
+    privs: ALL
+    type: sequence
+    obj: ALL_IN_SCHEMA
+    role: "ct_ingester"
+    schema: clinicaltrials
+  # GRANT USAGE ON SCHEMA mesh TO ct_ingester;
+  - db: fightfor
+    privs: USAGE
+    type: schema
+    obj: "mesh"
+    role: "ct_ingester"
+    schema: ""
+  # GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA mesh TO ct_ingester;
+  - db: fightfor
+    privs: ALL
+    type: table
+    obj: ALL_IN_SCHEMA
+    role: "ct_ingester"
+    schema: mesh
+  # GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA mesh TO ct_ingester;
+  - db: fightfor
+    privs: ALL
+    type: sequence
+    obj: ALL_IN_SCHEMA
+    role: "ct_ingester"
+    schema: mesh
+  # GRANT USAGE ON SCHEMA mesh TO mt_ingester;
+  - db: fightfor
+    privs: USAGE
+    type: schema
+    obj: "mesh"
+    role: "mt_ingester"
+    schema: ""
+  # GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA mesh TO mt_ingester;
+  - db: fightfor
+    privs: ALL
+    type: table
+    obj: ALL_IN_SCHEMA
+    role: "mt_ingester"
+    schema: mesh
+  # GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA mesh TO mt_ingester;
+  - db: fightfor
+    privs: ALL
+    type: sequence
+    obj: ALL_IN_SCHEMA
+    role: "mt_ingester"
+    schema: mesh
+  # GRANT USAGE ON SCHEMA pubmed TO pubmed_ingester;
+  - db: fightfor
+    privs: USAGE
+    type: schema
+    obj: "pubmed"
+    role: "pubmed_ingester"
+    schema: ""
+  # GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA pubmed TO pubmed_ingester;
+  - db: fightfor
+    privs: ALL
+    type: table
+    obj: ALL_IN_SCHEMA
+    role: "pubmed_ingester"
+    schema: pubmed
+  # GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA pubmed TO pubmed_ingester;
+  - db: fightfor
+    privs: ALL
+    type: sequence
+    obj: ALL_IN_SCHEMA
+    role: "pubmed_ingester"
+    schema: pubmed
 
 project:
   name: "fightfor-alembic"
