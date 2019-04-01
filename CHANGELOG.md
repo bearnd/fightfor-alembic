@@ -1,5 +1,15 @@
 ## Changelog
 
+### v0.10.0
+
+Issue No. 201:
+
+- Updated the Ansible role to set the PostgreSQL privileges for the different service-users.
+
+Issue No. 202:
+
+- Added new revision that removes the MeSH tables from the `pubmed` schema, i.e., the `descriptors`, `qualifiers`, and `chemicals` tables, and instead uses new FKs to the corresponding tables under the `mesh` schema.
+
 ### v0.9.0
 
 - Released without merging the feature branch.
