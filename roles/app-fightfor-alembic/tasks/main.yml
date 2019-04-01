@@ -20,6 +20,15 @@
   ignore_errors: true
   when: is_vagrant is defined and is_vagrant == True
 
+- name: Create `fightfor` PostgreSQL database in production.
+  postgresql_db:
+    name: fightfor
+    encoding: UTF-8
+    state: present
+  become: true
+  become_user: postgres
+  when: is_vagrant is not defined or is_vagrant == False
+
 - name: Create schemata in the `fightfor` database under PostgreSQL.
   postgresql_schema:
     database: "fightfor"
@@ -104,6 +113,7 @@
     type: "{{ item.type }}"
     obj: "{{ item.obj }}"
     role: "{{ item.role }}"
+    schema: "{{ item.schema }}"
   with_items: "{{ postgresql_privileges }}"
   become: true
   become_user: postgres
