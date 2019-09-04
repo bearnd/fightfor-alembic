@@ -99,7 +99,7 @@
 - name: Copy PostgreSQL configuration files.
   copy:
     src: "{{ item }}"
-    dest: "//etc/postgresql/9.5/main/{{ item }}"
+    dest: "/etc/postgresql/9.5/main/{{ item }}"
     owner: "postgres"
     mode: 0600
   with_items:
