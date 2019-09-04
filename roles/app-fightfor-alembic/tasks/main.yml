@@ -106,6 +106,15 @@
     - "pg_hba.conf"
     - "postgresql.conf"
 
+- name: Copy PostgreSQL configuration file meant for Hetzner server
+        (Production).
+  copy:
+    src: "postgresql_hetzner.conf"
+    dest: "/etc/postgresql/9.5/main/postgresql.conf"
+    owner: "postgres"
+    mode: 0600
+  when: inventory_hostname == "fightfor.app"
+
 - name: Set PostgreSQL privileges.
   postgresql_privs:
     db: "{{ item.db }}"
