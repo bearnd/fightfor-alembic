@@ -166,6 +166,112 @@ postgresql_privileges:
     obj: ALL_IN_SCHEMA
     role: "pubmed_ingester"
     schema: pubmed
+  # GRANT USAGE ON SCHEMA mesh TO pubmed_ingester;
+  - db: fightfor
+    privs: USAGE
+    type: schema
+    obj: "mesh"
+    role: "pubmed_ingester"
+    schema: ""
+  # GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA mesh TO pubmed_ingester;
+  - db: fightfor
+    privs: ALL
+    type: table
+    obj: ALL_IN_SCHEMA
+    role: "pubmed_ingester"
+    schema: mesh
+  # GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA mesh TO pubmed_ingester;
+  - db: fightfor
+    privs: ALL
+    type: sequence
+    obj: ALL_IN_SCHEMA
+    role: "pubmed_ingester"
+    schema: mesh
+
+  # GRANT USAGE ON SCHEMA mesh TO ffgraphql;
+  - db: fightfor
+    privs: USAGE
+    type: schema
+    obj: "mesh"
+    role: "ffgraphql"
+    schema: ""
+  # GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA mesh TO ffgraphql;
+  - db: fightfor
+    privs: ALL
+    type: table
+    obj: ALL_IN_SCHEMA
+    role: "ffgraphql"
+    schema: mesh
+  # GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA mesh TO ffgraphql;
+  - db: fightfor
+    privs: ALL
+    type: sequence
+    obj: ALL_IN_SCHEMA
+    role: "ffgraphql"
+    schema: mesh
+  # GRANT USAGE ON SCHEMA pubmed TO ffgraphql;
+  - db: fightfor
+    privs: USAGE
+    type: schema
+    obj: "pubmed"
+    role: "ffgraphql"
+    schema: ""
+  # GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA pubmed TO ffgraphql;
+  - db: fightfor
+    privs: ALL
+    type: table
+    obj: ALL_IN_SCHEMA
+    role: "ffgraphql"
+    schema: pubmed
+  # GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA pubmed TO ffgraphql;
+  - db: fightfor
+    privs: ALL
+    type: sequence
+    obj: ALL_IN_SCHEMA
+    role: "ffgraphql"
+    schema: pubmed
+  # GRANT USAGE ON SCHEMA clinicaltrials TO ffgraphql;
+  - db: fightfor
+    privs: USAGE
+    type: schema
+    obj: "clinicaltrials"
+    role: "ffgraphql"
+    schema: ""
+  # GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA clinicaltrials TO ffgraphql;
+  - db: fightfor
+    privs: ALL
+    type: table
+    obj: ALL_IN_SCHEMA
+    role: "ffgraphql"
+    schema: clinicaltrials
+  # GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA clinicaltrials TO ffgraphql;
+  - db: fightfor
+    privs: ALL
+    type: sequence
+    obj: ALL_IN_SCHEMA
+    role: "ffgraphql"
+    schema: clinicaltrials
+  # GRANT USAGE ON SCHEMA app TO ffgraphql;
+  - db: fightfor
+    privs: USAGE
+    type: schema
+    obj: "app"
+    role: "ffgraphql"
+    schema: ""
+  # GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA app TO ffgraphql;
+  - db: fightfor
+    privs: ALL
+    type: table
+    obj: ALL_IN_SCHEMA
+    role: "ffgraphql"
+    schema: app
+  # GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA app TO ffgraphql;
+  - db: fightfor
+    privs: ALL
+    type: sequence
+    obj: ALL_IN_SCHEMA
+    role: "ffgraphql"
+    schema: app
 
 project:
   name: "fightfor-alembic"
