@@ -99,12 +99,21 @@
 - name: Copy PostgreSQL configuration files.
   copy:
     src: "{{ item }}"
-    dest: "//etc/postgresql/9.5/main/{{ item }}"
+    dest: "/etc/postgresql/9.5/main/{{ item }}"
     owner: "postgres"
     mode: 0600
   with_items:
     - "pg_hba.conf"
     - "postgresql.conf"
+
+- name: Copy PostgreSQL configuration file meant for Hetzner server
+        (Production).
+  copy:
+    src: "postgresql_hetzner.conf"
+    dest: "/etc/postgresql/9.5/main/postgresql.conf"
+    owner: "postgres"
+    mode: 0600
+  when: inventory_hostname == "fightfor.app"
 
 - name: Set PostgreSQL privileges.
   postgresql_privs:
