@@ -1,5 +1,12 @@
 ## Changelog
 
+### v0.11.0
+
+Issue No.294: duplicate key value violates unique constraint "ix_mesh_supplementals_name":
+
+- Added ffgraphql user to DB.
+- Added new revision to add UNIQUE constraints.
+
 ### v0.10.0
 
 Issue No. 201:
