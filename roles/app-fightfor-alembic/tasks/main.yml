@@ -113,7 +113,7 @@
     dest: "/etc/postgresql/9.5/main/postgresql.conf"
     owner: "postgres"
     mode: 0600
-  when: inventory_hostname == "fightfor.app"
+  when: inventory_hostname == "api.fightfor.app"
 
 - name: Set PostgreSQL privileges.
   postgresql_privs:
