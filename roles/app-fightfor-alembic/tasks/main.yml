@@ -7,6 +7,12 @@
   ignore_errors: true
   become: true
 
+- name: Add the Deadsnakes apt repository to sources.
+  apt_repository:
+    repo: ppa:deadsnakes/ppa
+    state: present
+    update_cache: yes
+    
 - name: Install apt dependencies.
   apt:
     name: "{{ item }}"
@@ -18,18 +24,25 @@
   include_role:
     name: geerlingguy.postgresql
   ignore_errors: true
-  when: is_vagrant is defined and is_vagrant == True
 
-- name: Create `fightfor` PostgreSQL database in production.
+- name: Create `fightfor` PostgreSQL database.
   postgresql_db:
     name: fightfor
     encoding: UTF-8
     state: present
   become: true
   become_user: postgres
-  when: is_vagrant is not defined or is_vagrant == False
 
-- name: Create schemata in the `fightfor` database under PostgreSQL.
+- name: Create `test` PostgreSQL database.
+  postgresql_db:
+    name: test
+    encoding: UTF-8
+    state: present
+  become: true
+  become_user: postgres
+  when: is_vagrant is defined and is_vagrant == True
+
+- name: Create schemata in the `fightfor` PostgreSQL database.
   postgresql_schema:
     database: "fightfor"
     name: "{{ item }}"
@@ -113,7 +126,7 @@
     dest: "/etc/postgresql/9.5/main/postgresql.conf"
     owner: "postgres"
     mode: 0600
-  when: inventory_hostname == "fightfor.app"
+  when: inventory_hostname == "api.fightfor.app"
 
 - name: Set PostgreSQL privileges.
   postgresql_privs:
@@ -140,7 +153,7 @@
     name: "{{ item }}"
     state: latest
     virtualenv: "{{ system.directories.virtual_env }}"
-    virtualenv_python: python3.5
+    virtualenv_python: python3.7
   with_items: "{{ dependencies.pip.virtualenv }}"
   become: true
   become_user: "{{ system.user }}"
@@ -221,7 +234,7 @@
     requirements: requirements_dev.txt
     state: latest
     virtualenv: "{{ system.directories.virtual_env }}"
-    virtualenv_python: python3.5
+    virtualenv_python: python3.7
   when: is_vagrant is defined and is_vagrant == True
   become: true
   become_user: "{{ system.user }}"
@@ -232,7 +245,7 @@
     requirements: requirements.txt
     state: latest
     virtualenv: "{{ system.directories.virtual_env }}"
-    virtualenv_python: python3.5
+    virtualenv_python: python3.7
   when: is_vagrant is not defined or is_vagrant == False
   become: true
   become_user: "{{ system.user }}"
