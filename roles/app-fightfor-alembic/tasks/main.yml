@@ -41,7 +41,7 @@
   become: true
   become_user: postgres
   when: is_vagrant is defined and is_vagrant == True
-  
+
 - name: Create schemata in the `fightfor` PostgreSQL database.
   postgresql_schema:
     database: "fightfor"
