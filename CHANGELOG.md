@@ -1,5 +1,9 @@
 ## Changelog
 
+### v0.12.0
+
+- Story CH1062: Update to Python 3.7.
+
 ### v0.11.0
 
 Issue No.294: duplicate key value violates unique constraint "ix_mesh_supplementals_name":
