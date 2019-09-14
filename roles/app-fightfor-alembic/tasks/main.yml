@@ -24,7 +24,6 @@
   include_role:
     name: geerlingguy.postgresql
   ignore_errors: true
-  when: is_vagrant is defined and is_vagrant == True
 
 - name: Create `fightfor` PostgreSQL database in production.
   postgresql_db:
