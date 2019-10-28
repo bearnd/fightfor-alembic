@@ -349,6 +349,30 @@ postgresql_privileges:
     obj: ALL_IN_SCHEMA
     role: "ffgraphql"
     schema: medline
+  # ------------------------------------------------------------------
+  # Grant full usage of the `medline` schema to the `mp_ingester` user
+  # ------------------------------------------------------------------
+  # GRANT USAGE ON SCHEMA medline TO mp_ingester;
+  - db: fightfor
+    privs: USAGE
+    type: schema
+    obj: "medline"
+    role: "mp_ingester"
+    schema: ""
+  # GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA medline TO mp_ingester;
+  - db: fightfor
+    privs: ALL
+    type: table
+    obj: ALL_IN_SCHEMA
+    role: "mp_ingester"
+    schema: medline
+  # GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA medline TO mp_ingester;
+  - db: fightfor
+    privs: ALL
+    type: sequence
+    obj: ALL_IN_SCHEMA
+    role: "mp_ingester"
+    schema: medline
 
 project:
   name: "fightfor-alembic"
