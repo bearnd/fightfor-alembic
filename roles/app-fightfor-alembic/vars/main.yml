@@ -52,6 +52,9 @@ postgresql_users:
   - name: "ffgraphql"
     password: "{{ sql_password }}"
     port: 5432
+  - name: "mp_ingester"
+    password: "{{ sql_password }}"
+    port: 5432
 
 # PostgreSQL schemata.
 postgresql_schemata:
