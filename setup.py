@@ -24,7 +24,7 @@ test_requirements = [
 
 setup(
     name='fightfor_alembic',
-    version='0.13.0',
+    version='0.13.1',
     description="Alembic migrations for the fightfor project.",
     long_description=readme + '\n\n' + history,
     author="Adamos Kyriakou",
