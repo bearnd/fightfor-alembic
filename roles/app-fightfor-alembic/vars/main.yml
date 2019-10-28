@@ -67,6 +67,9 @@ postgresql_extensions:
 
 # PostgreSQL privileges.
 postgresql_privileges:
+  # ---------------------------------------------------------------
+  # Grant all privileges to the `fightfor` database to each DB user
+  # ---------------------------------------------------------------
   # GRANT ALL PRIVILEGES ON DATABASE fightfor TO fightfor_alembic;
   - db: fightfor
     privs: ALL
@@ -95,6 +98,9 @@ postgresql_privileges:
     obj: fightfor
     role: "pubmed_ingester"
     schema: ""
+  # -------------------------------------------------------------------------
+  # Grant full usage of the `clinicaltrials` schema to the `ct_ingester` user
+  # -------------------------------------------------------------------------
   # GRANT USAGE ON SCHEMA clinicaltrials TO ct_ingester;
   - db: fightfor
     privs: USAGE
@@ -116,6 +122,9 @@ postgresql_privileges:
     obj: ALL_IN_SCHEMA
     role: "ct_ingester"
     schema: clinicaltrials
+  # ---------------------------------------------------------------
+  # Grant full usage of the `mesh` schema to the `ct_ingester` user
+  # ---------------------------------------------------------------
   # GRANT USAGE ON SCHEMA mesh TO ct_ingester;
   - db: fightfor
     privs: USAGE
@@ -137,6 +146,9 @@ postgresql_privileges:
     obj: ALL_IN_SCHEMA
     role: "ct_ingester"
     schema: mesh
+  # ---------------------------------------------------------------
+  # Grant full usage of the `mesh` schema to the `mt_ingester` user
+  # ---------------------------------------------------------------
   # GRANT USAGE ON SCHEMA mesh TO mt_ingester;
   - db: fightfor
     privs: USAGE
@@ -158,6 +170,9 @@ postgresql_privileges:
     obj: ALL_IN_SCHEMA
     role: "mt_ingester"
     schema: mesh
+  # ---------------------------------------------------------------------
+  # Grant full usage of the `pubmed` schema to the `pubmed_ingester` user
+  # ---------------------------------------------------------------------
   # GRANT USAGE ON SCHEMA pubmed TO pubmed_ingester;
   - db: fightfor
     privs: USAGE
@@ -179,6 +194,9 @@ postgresql_privileges:
     obj: ALL_IN_SCHEMA
     role: "pubmed_ingester"
     schema: pubmed
+  # -------------------------------------------------------------------
+  # Grant full usage of the `mesh` schema to the `pubmed_ingester` user
+  # -------------------------------------------------------------------
   # GRANT USAGE ON SCHEMA mesh TO pubmed_ingester;
   - db: fightfor
     privs: USAGE
@@ -200,7 +218,9 @@ postgresql_privileges:
     obj: ALL_IN_SCHEMA
     role: "pubmed_ingester"
     schema: mesh
-
+  # -------------------------------------------------------------
+  # Grant full usage of the `mesh` schema to the `ffgraphql` user
+  # -------------------------------------------------------------
   # GRANT USAGE ON SCHEMA mesh TO ffgraphql;
   - db: fightfor
     privs: USAGE
@@ -222,6 +242,9 @@ postgresql_privileges:
     obj: ALL_IN_SCHEMA
     role: "ffgraphql"
     schema: mesh
+  # ---------------------------------------------------------------
+  # Grant full usage of the `pubmed` schema to the `ffgraphql` user
+  # ---------------------------------------------------------------
   # GRANT USAGE ON SCHEMA pubmed TO ffgraphql;
   - db: fightfor
     privs: USAGE
@@ -243,6 +266,9 @@ postgresql_privileges:
     obj: ALL_IN_SCHEMA
     role: "ffgraphql"
     schema: pubmed
+  # -----------------------------------------------------------------------
+  # Grant full usage of the `clinicaltrials` schema to the `ffgraphql` user
+  # -----------------------------------------------------------------------
   # GRANT USAGE ON SCHEMA clinicaltrials TO ffgraphql;
   - db: fightfor
     privs: USAGE
@@ -264,6 +290,9 @@ postgresql_privileges:
     obj: ALL_IN_SCHEMA
     role: "ffgraphql"
     schema: clinicaltrials
+  # ------------------------------------------------------------
+  # Grant full usage of the `app` schema to the `ffgraphql` user
+  # ------------------------------------------------------------
   # GRANT USAGE ON SCHEMA app TO ffgraphql;
   - db: fightfor
     privs: USAGE
