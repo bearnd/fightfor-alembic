@@ -62,6 +62,7 @@ postgresql_schemata:
   - pubmed
   - mesh
   - app
+  - medline
 
 # PostgreSQL extensions.
 postgresql_extensions:
