@@ -1,5 +1,9 @@
 ## Changelog
 
+### v0.13.1
+
+- Fixed issue in the Ansible tasks where the URL to the Git repository was incorrect.
+
 ### v0.13.0
 
 - Story No. 1101: Switch `fightfor-alembic` Git deployment to GitLab.com.
