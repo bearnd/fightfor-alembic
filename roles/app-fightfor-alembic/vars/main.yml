@@ -102,6 +102,13 @@ postgresql_privileges:
     obj: fightfor
     role: "pubmed_ingester"
     schema: ""
+  # GRANT ALL PRIVILEGES ON DATABASE fightfor TO mp_ingester;
+  - db: fightfor
+    privs: ALL
+    type: database
+    obj: fightfor
+    role: "mp_ingester"
+    schema: ""
   # -------------------------------------------------------------------------
   # Grant full usage of the `clinicaltrials` schema to the `ct_ingester` user
   # -------------------------------------------------------------------------
