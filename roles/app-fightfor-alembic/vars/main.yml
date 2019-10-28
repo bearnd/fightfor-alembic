@@ -373,6 +373,30 @@ postgresql_privileges:
     obj: ALL_IN_SCHEMA
     role: "mp_ingester"
     schema: medline
+  # ---------------------------------------------------------------
+  # Grant full usage of the `mesh` schema to the `mp_ingester` user
+  # ---------------------------------------------------------------
+  # GRANT USAGE ON SCHEMA mesh TO mp_ingester;
+  - db: fightfor
+    privs: USAGE
+    type: schema
+    obj: "mesh"
+    role: "mp_ingester"
+    schema: ""
+  # GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA mesh TO mp_ingester;
+  - db: fightfor
+    privs: ALL
+    type: table
+    obj: ALL_IN_SCHEMA
+    role: "mp_ingester"
+    schema: mesh
+  # GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA mesh TO mp_ingester;
+  - db: fightfor
+    privs: ALL
+    type: sequence
+    obj: ALL_IN_SCHEMA
+    role: "mp_ingester"
+    schema: mesh
 
 project:
   name: "fightfor-alembic"
