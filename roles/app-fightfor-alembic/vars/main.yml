@@ -15,6 +15,16 @@ sql_password: !vault |
   62373965396338303236383964646131623934373439663163396239393938336334643437613838
   3762353166616631636234653538643336396663303236303833
 
+# GitLab variables.
+gitlab_deploy_token_username: "fightfor-alembic-deployer"
+gitlab_deploy_token_password: !vault |
+  $ANSIBLE_VAULT;1.1;AES256
+  64316662313632346234376132313139393530616461393966393933373862636263646364643164
+  3138353434663965663836636463653765646332373935640a616436363164313565343839643032
+  32636536343632316164393033656361636166663237613734396231323734396637663533353761
+  3234333739396466370a626466366239613338366237373164373533666533386538616161323034
+  39613633336362346433373433336433346532333533633230356237633166316435
+
 # PostgreSQL Server Settings.
 postgresql_python_library: "python-psycopg2"
 
@@ -42,6 +52,9 @@ postgresql_users:
   - name: "ffgraphql"
     password: "{{ sql_password }}"
     port: 5432
+  - name: "mp_ingester"
+    password: "{{ sql_password }}"
+    port: 5432
 
 # PostgreSQL schemata.
 postgresql_schemata:
@@ -49,6 +62,7 @@ postgresql_schemata:
   - pubmed
   - mesh
   - app
+  - medline
 
 # PostgreSQL extensions.
 postgresql_extensions:
@@ -57,6 +71,9 @@ postgresql_extensions:
 
 # PostgreSQL privileges.
 postgresql_privileges:
+  # ---------------------------------------------------------------
+  # Grant all privileges to the `fightfor` database to each DB user
+  # ---------------------------------------------------------------
   # GRANT ALL PRIVILEGES ON DATABASE fightfor TO fightfor_alembic;
   - db: fightfor
     privs: ALL
@@ -85,6 +102,16 @@ postgresql_privileges:
     obj: fightfor
     role: "pubmed_ingester"
     schema: ""
+  # GRANT ALL PRIVILEGES ON DATABASE fightfor TO mp_ingester;
+  - db: fightfor
+    privs: ALL
+    type: database
+    obj: fightfor
+    role: "mp_ingester"
+    schema: ""
+  # -------------------------------------------------------------------------
+  # Grant full usage of the `clinicaltrials` schema to the `ct_ingester` user
+  # -------------------------------------------------------------------------
   # GRANT USAGE ON SCHEMA clinicaltrials TO ct_ingester;
   - db: fightfor
     privs: USAGE
@@ -106,6 +133,9 @@ postgresql_privileges:
     obj: ALL_IN_SCHEMA
     role: "ct_ingester"
     schema: clinicaltrials
+  # ---------------------------------------------------------------
+  # Grant full usage of the `mesh` schema to the `ct_ingester` user
+  # ---------------------------------------------------------------
   # GRANT USAGE ON SCHEMA mesh TO ct_ingester;
   - db: fightfor
     privs: USAGE
@@ -127,6 +157,9 @@ postgresql_privileges:
     obj: ALL_IN_SCHEMA
     role: "ct_ingester"
     schema: mesh
+  # ---------------------------------------------------------------
+  # Grant full usage of the `mesh` schema to the `mt_ingester` user
+  # ---------------------------------------------------------------
   # GRANT USAGE ON SCHEMA mesh TO mt_ingester;
   - db: fightfor
     privs: USAGE
@@ -148,6 +181,9 @@ postgresql_privileges:
     obj: ALL_IN_SCHEMA
     role: "mt_ingester"
     schema: mesh
+  # ---------------------------------------------------------------------
+  # Grant full usage of the `pubmed` schema to the `pubmed_ingester` user
+  # ---------------------------------------------------------------------
   # GRANT USAGE ON SCHEMA pubmed TO pubmed_ingester;
   - db: fightfor
     privs: USAGE
@@ -169,6 +205,9 @@ postgresql_privileges:
     obj: ALL_IN_SCHEMA
     role: "pubmed_ingester"
     schema: pubmed
+  # -------------------------------------------------------------------
+  # Grant full usage of the `mesh` schema to the `pubmed_ingester` user
+  # -------------------------------------------------------------------
   # GRANT USAGE ON SCHEMA mesh TO pubmed_ingester;
   - db: fightfor
     privs: USAGE
@@ -190,7 +229,9 @@ postgresql_privileges:
     obj: ALL_IN_SCHEMA
     role: "pubmed_ingester"
     schema: mesh
-
+  # -------------------------------------------------------------
+  # Grant full usage of the `mesh` schema to the `ffgraphql` user
+  # -------------------------------------------------------------
   # GRANT USAGE ON SCHEMA mesh TO ffgraphql;
   - db: fightfor
     privs: USAGE
@@ -212,6 +253,9 @@ postgresql_privileges:
     obj: ALL_IN_SCHEMA
     role: "ffgraphql"
     schema: mesh
+  # ---------------------------------------------------------------
+  # Grant full usage of the `pubmed` schema to the `ffgraphql` user
+  # ---------------------------------------------------------------
   # GRANT USAGE ON SCHEMA pubmed TO ffgraphql;
   - db: fightfor
     privs: USAGE
@@ -233,6 +277,9 @@ postgresql_privileges:
     obj: ALL_IN_SCHEMA
     role: "ffgraphql"
     schema: pubmed
+  # -----------------------------------------------------------------------
+  # Grant full usage of the `clinicaltrials` schema to the `ffgraphql` user
+  # -----------------------------------------------------------------------
   # GRANT USAGE ON SCHEMA clinicaltrials TO ffgraphql;
   - db: fightfor
     privs: USAGE
@@ -254,6 +301,9 @@ postgresql_privileges:
     obj: ALL_IN_SCHEMA
     role: "ffgraphql"
     schema: clinicaltrials
+  # ------------------------------------------------------------
+  # Grant full usage of the `app` schema to the `ffgraphql` user
+  # ------------------------------------------------------------
   # GRANT USAGE ON SCHEMA app TO ffgraphql;
   - db: fightfor
     privs: USAGE
@@ -275,6 +325,78 @@ postgresql_privileges:
     obj: ALL_IN_SCHEMA
     role: "ffgraphql"
     schema: app
+  # ----------------------------------------------------------------
+  # Grant full usage of the `medline` schema to the `ffgraphql` user
+  # ----------------------------------------------------------------
+  # GRANT USAGE ON SCHEMA medline TO ffgraphql;
+  - db: fightfor
+    privs: USAGE
+    type: schema
+    obj: "medline"
+    role: "ffgraphql"
+    schema: ""
+  # GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA medline TO ffgraphql;
+  - db: fightfor
+    privs: ALL
+    type: table
+    obj: ALL_IN_SCHEMA
+    role: "ffgraphql"
+    schema: medline
+  # GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA medline TO ffgraphql;
+  - db: fightfor
+    privs: ALL
+    type: sequence
+    obj: ALL_IN_SCHEMA
+    role: "ffgraphql"
+    schema: medline
+  # ------------------------------------------------------------------
+  # Grant full usage of the `medline` schema to the `mp_ingester` user
+  # ------------------------------------------------------------------
+  # GRANT USAGE ON SCHEMA medline TO mp_ingester;
+  - db: fightfor
+    privs: USAGE
+    type: schema
+    obj: "medline"
+    role: "mp_ingester"
+    schema: ""
+  # GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA medline TO mp_ingester;
+  - db: fightfor
+    privs: ALL
+    type: table
+    obj: ALL_IN_SCHEMA
+    role: "mp_ingester"
+    schema: medline
+  # GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA medline TO mp_ingester;
+  - db: fightfor
+    privs: ALL
+    type: sequence
+    obj: ALL_IN_SCHEMA
+    role: "mp_ingester"
+    schema: medline
+  # ---------------------------------------------------------------
+  # Grant full usage of the `mesh` schema to the `mp_ingester` user
+  # ---------------------------------------------------------------
+  # GRANT USAGE ON SCHEMA mesh TO mp_ingester;
+  - db: fightfor
+    privs: USAGE
+    type: schema
+    obj: "mesh"
+    role: "mp_ingester"
+    schema: ""
+  # GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA mesh TO mp_ingester;
+  - db: fightfor
+    privs: ALL
+    type: table
+    obj: ALL_IN_SCHEMA
+    role: "mp_ingester"
+    schema: mesh
+  # GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA mesh TO mp_ingester;
+  - db: fightfor
+    privs: ALL
+    type: sequence
+    obj: ALL_IN_SCHEMA
+    role: "mp_ingester"
+    schema: mesh
 
 project:
   name: "fightfor-alembic"

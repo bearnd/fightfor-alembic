@@ -1,5 +1,10 @@
 ## Changelog
 
+### v0.13.0
+
+- Story No. 1101: Switch `fightfor-alembic` Git deployment to GitLab.com.
+- Story No. 1703: Add MedlinePlus schema migrations and privileges.
+
 ### v0.12.0
 
 - Story CH1062: Update to Python 3.7.
